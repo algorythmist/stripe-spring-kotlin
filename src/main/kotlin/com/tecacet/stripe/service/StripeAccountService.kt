@@ -7,8 +7,6 @@ import com.tecacet.stripe.dto.Address
 import com.tecacet.stripe.dto.StripeAccountRequest
 import java.time.LocalDate
 
-const val COUNTRY = "US"
-const val CURRENCY = "USD"
 const val BUSINESS_TYPE = "Aquariums"
 const val MCC = "7998"
 const val INDIVIDUAL_ACCOUNT_TYPE = "individual"
@@ -17,7 +15,7 @@ class StripeAccountService {
 
     @Throws(StripeException::class)
     fun createIndividualAccount(request: StripeAccountRequest): Account {
-        val individual: AccountCreateParams.Individual = AccountCreateParams.Individual.builder().setFirstName(request.firstName)
+        val individual = AccountCreateParams.Individual.builder().setFirstName(request.firstName)
                 .setLastName(request.lastName)
                 .setIdNumber(request.ssn)
                 .setDob(getDateOfBirth(request.dateOfBirth))
@@ -25,7 +23,7 @@ class StripeAccountService {
                 .setPhone(request.phone)
                 .setAddress(createIndividualAddress(request.address!!))
                 .build()
-        val accountCreateParams: AccountCreateParams = AccountCreateParams.builder()
+        val accountCreateParams = AccountCreateParams.builder()
                 .setCountry(COUNTRY)
                 .setDefaultCurrency(CURRENCY)
                 .setType(AccountCreateParams.Type.CUSTOM)
