@@ -2,6 +2,8 @@ package com.tecacet.stripe.service
 
 import com.stripe.exception.StripeException
 import com.stripe.model.Account
+import com.stripe.model.BankAccount
+import com.stripe.model.ExternalAccount
 import com.stripe.param.AccountCreateParams
 import com.tecacet.stripe.dto.Address
 import com.tecacet.stripe.dto.StripeAccountRequest
@@ -36,7 +38,7 @@ class StripeAccountService {
     }
 
     @Throws(StripeException::class)
-    fun findAccount(accountId: String) : Account? = Account.retrieve(accountId)
+    fun findAccount(accountId: String): Account? = Account.retrieve(accountId)
 
     @Throws(StripeException::class)
     fun delete(accountId: String): Boolean {
@@ -56,6 +58,21 @@ class StripeAccountService {
         )
         val params = mapOf("tos_acceptance" to tosAcceptanceParams)
         return account.update(params)
+    }
+
+    @Throws(StripeException::class)
+    fun linkBankAccount(accountId: String,
+                        accountNumber: String,
+                        routingNumber: String): ExternalAccount? {
+        val account = Account.retrieve(accountId)
+        val details = mapOf(
+                "object" to "bank_account",
+                "country" to COUNTRY,
+                "currency" to CURRENCY,
+                "account_number" to accountNumber,
+                "routing_number" to routingNumber)
+        val params = mapOf("external_account" to details)
+        return account.externalAccounts.create(params)
     }
 
     private fun createIndividualAddress(address: Address): AccountCreateParams.Individual.Address {

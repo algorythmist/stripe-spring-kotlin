@@ -2,8 +2,11 @@ package com.tecacet.stripe.service
 
 import com.stripe.exception.StripeException
 import com.stripe.model.Customer
+import com.stripe.model.Token
 import com.stripe.param.CustomerCreateParams
+import com.stripe.param.TokenCreateParams
 import com.tecacet.stripe.dto.Address
+import com.tecacet.stripe.dto.CreditCardRequest
 import com.tecacet.stripe.dto.StripeCustomerRequest
 
 class StripeCustomerService {
@@ -17,6 +20,18 @@ class StripeCustomerService {
                 .setAddress(getCustomerAddress(request.address))
                 .build()
         return Customer.create(customerCreateParams)
+    }
+
+    @Throws(StripeException::class)
+    fun createCreditCard(creditCard: CreditCardRequest): Token {
+        val card = TokenCreateParams.Card.builder()
+                .setCvc(creditCard.ccv)
+                .setNumber(creditCard.creditCardNumber)
+                .setExpYear(Integer.toString(creditCard.expirationYear))
+                .setExpMonth(Integer.toString(creditCard.expirationMonth))
+                .build()
+        val tokenCreateParams = TokenCreateParams.builder().setCard(card).build()
+        return Token.create(tokenCreateParams)
     }
 
     private fun getCustomerAddress(address: Address?): CustomerCreateParams.Address? {
