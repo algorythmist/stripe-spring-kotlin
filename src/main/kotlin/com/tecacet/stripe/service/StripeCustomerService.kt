@@ -22,18 +22,6 @@ class StripeCustomerService {
         return Customer.create(customerCreateParams)
     }
 
-    @Throws(StripeException::class)
-    fun createCreditCard(creditCard: CreditCardRequest): Token {
-        val card = TokenCreateParams.Card.builder()
-                .setCvc(creditCard.ccv)
-                .setNumber(creditCard.creditCardNumber)
-                .setExpYear(Integer.toString(creditCard.expirationYear))
-                .setExpMonth(Integer.toString(creditCard.expirationMonth))
-                .build()
-        val tokenCreateParams = TokenCreateParams.builder().setCard(card).build()
-        return Token.create(tokenCreateParams)
-    }
-
     private fun getCustomerAddress(address: Address?): CustomerCreateParams.Address? {
         if (address == null) {
             return null

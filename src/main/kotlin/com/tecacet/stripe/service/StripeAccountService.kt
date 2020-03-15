@@ -33,6 +33,7 @@ class StripeAccountService {
                 .setBusinessProfile(createBusinessProfile())
                 .setIndividual(individual)
                 .addRequestedCapability(AccountCreateParams.RequestedCapability.TRANSFERS)
+                //.addRequestedCapability(AccountCreateParams.RequestedCapability.CARD_PAYMENTS)
                 .build()
         return Account.create(accountCreateParams)
     }
