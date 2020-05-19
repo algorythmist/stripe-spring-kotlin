@@ -6,7 +6,6 @@ import com.stripe.model.Payout
 import com.stripe.param.BalanceTransactionListParams
 import com.stripe.param.PayoutListParams
 
-
 class StripePayoutService {
 
     fun findPayout(payoutId : String): Payout? {

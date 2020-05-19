@@ -2,7 +2,6 @@ package com.tecacet.stripe.service
 
 import com.stripe.model.Event
 import com.stripe.model.WebhookEndpoint
-import com.stripe.net.Webhook
 import com.stripe.param.EventListParams
 import com.stripe.param.WebhookEndpointListParams
 
