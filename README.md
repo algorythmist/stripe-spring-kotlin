@@ -1,4 +1,4 @@
-# Using the Strip API in Kotlin
+# Using the Stripe API in Kotlin
 
 ## Getting Started
 1. Create a Stripe Account https://stripe.com/
