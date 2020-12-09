@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class Configuration {
 
-    @Value("\${stripe-api-key}")
+    @Value("\${stripe.api.key}")
     private lateinit var apiKey: String
 
     @Bean

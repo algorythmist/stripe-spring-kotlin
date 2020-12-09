@@ -7,6 +7,6 @@
 4. Enter your secret key in application-local.properties:
 
 ```
-  stripe-api-key = sk_test_XXX
+  stripe.api.key = sk_test_XXX
 ```
   
