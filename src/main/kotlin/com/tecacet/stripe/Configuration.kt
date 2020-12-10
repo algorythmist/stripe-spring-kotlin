@@ -13,7 +13,6 @@ class Configuration {
 
     @Bean
     fun configureApiKey() {
-        println(apiKey.subSequence(0,5))
         Stripe.apiKey = apiKey
     }
 
